@@ -23,5 +23,3 @@ subprojects {
         mavenCentral()
     }
 }
-
-apply from: './publish-setup.gradle'
