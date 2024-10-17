@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import io.github.centrifugal.centrifuge.Client;
 import io.github.centrifugal.centrifuge.ConnectedEvent;
 import io.github.centrifugal.centrifuge.ConnectingEvent;
