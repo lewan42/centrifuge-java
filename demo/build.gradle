@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 30
     
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -10,8 +10,8 @@ android {
 
     defaultConfig {
         applicationId "io.github.centrifugal.centrifuge.demo"
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion 23
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
