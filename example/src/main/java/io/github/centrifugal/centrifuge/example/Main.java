@@ -3,8 +3,11 @@ package io.github.centrifugal.centrifuge.example;
 import io.github.centrifugal.centrifuge.Client;
 import io.github.centrifugal.centrifuge.ClientState;
 import io.github.centrifugal.centrifuge.ConnectingEvent;
+import io.github.centrifugal.centrifuge.ConnectionDataEvent;
+import io.github.centrifugal.centrifuge.ConnectionDataGetter;
 import io.github.centrifugal.centrifuge.ConnectionTokenEvent;
 import io.github.centrifugal.centrifuge.ConnectionTokenGetter;
+import io.github.centrifugal.centrifuge.DataCallback;
 import io.github.centrifugal.centrifuge.DuplicateSubscriptionException;
 import io.github.centrifugal.centrifuge.HistoryOptions;
 import io.github.centrifugal.centrifuge.JoinEvent;
@@ -93,14 +96,18 @@ public class Main {
         };
 
         Options opts = new Options();
-//        opts.setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTY1OTQ0MTY4MiwiaWF0IjoxNjU4ODM2ODgyfQ.tyd2_TVq29WZuhh5OBni6dq7Lqry2s8z2PHZavplr7A");
-//        opts.setTokenGetter(new ConnectionTokenGetter() {
-//            @Override
-//            public void getConnectionToken(ConnectionTokenEvent event, TokenCallback cb) {
-//                // At this place you must request the token from the backend in real app.
-//                cb.Done(null, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTY2MDA3MDYzMiwiaWF0IjoxNjU5NDY1ODMyfQ.EWBmBsvbUsOublFJeG0fAMQz_RnX3ZQwd5E00ldyyh0");
-//            }
-//        });
+        String data = "{ \"data\": { \"token\": \"jwt_token\" } }";
+        byte[] dataBytes = data.getBytes();
+
+        opts.setData(dataBytes);
+
+        //Example with data
+        opts.setDataGetter(new ConnectionDataGetter() {
+            @Override
+            public void getConnectionData(ConnectionDataEvent event, DataCallback cb) {
+                cb.Done(null, dataBytes);
+            }
+        });
 
         Client client = new Client(
                 "ws://localhost:8000/connection/websocket",
@@ -161,7 +168,7 @@ public class Main {
         }
         sub.subscribe();
 
-        String data="{\"input\": \"hi from Java\"}";
+//        String data="{\"input\": \"hi from Java\"}";
 
         // Publish to channel (won't wait until client subscribed to channel).
         // This message most probably won't be received by this client.
