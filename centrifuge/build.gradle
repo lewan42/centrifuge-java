@@ -1,25 +1,8 @@
-import com.vanniktech.maven.publish.JavaLibrary
-import com.vanniktech.maven.publish.JavadocJar
-
 plugins {
     id "java-library"
-    id "maven-publish"
     id "signing"
     id 'me.tylerbwong.gradle.metalava'
     id "com.google.protobuf" version "0.8.19"
-}
-
-apply plugin: "com.vanniktech.maven.publish.base"
-
-// See https://github.com/vanniktech/gradle-maven-publish-plugin#base-plugin
-mavenPublishing {
-    configure(new JavaLibrary(new JavadocJar.Javadoc(), true))
-}
-
-publishing {
-    publications.all {
-        artifactId = 'centrifuge-java'
-    }
 }
 
 dependencies {
